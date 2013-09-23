@@ -1,0 +1,7 @@
+books:
+  cursoSf2Mentor:
+       source: /Users/juandalibaba/Documents/curso_symfony2/source
+       output: /Users/juandalibaba/Sites/cursoSf2Mentor
+  fundamentosFramework:
+       source: /Users/juandalibaba/Documents/fundamentosFramework
+       output: /Users/juandalibaba/Sites/fundamentosFramework
