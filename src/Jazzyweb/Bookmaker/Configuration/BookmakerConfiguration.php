@@ -5,7 +5,7 @@
  * Time: 21:07
  */
 
-namespace Jazzyweb\Configuration;
+namespace Jazzyweb\Bookmaker\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

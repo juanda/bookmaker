@@ -5,9 +5,9 @@
  * Time: 19:41
  */
 
-namespace Jazzyweb\Command;
+namespace Jazzyweb\Bookmaker\Command;
 
-use Jazzyweb\Configuration\BookmakerConfiguration;
+use Jazzyweb\Bookmaker\Configuration\BookmakerConfiguration;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;

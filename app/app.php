@@ -3,7 +3,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Jazzyweb\Command\PublishCommand;
+use Jazzyweb\Bookmaker\Command\PublishCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
