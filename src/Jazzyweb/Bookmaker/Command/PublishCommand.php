@@ -29,7 +29,7 @@ class PublishCommand extends Command{
         parent::__construct();
 
         try{
-            $configDirectories = array(__DIR__.'/../../../config');
+            $configDirectories = array(__DIR__.'/../../../../config');
 
             $locator = new FileLocator($configDirectories);
             $configFile = $locator->locate('config.yml');
