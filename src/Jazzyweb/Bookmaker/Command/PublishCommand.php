@@ -23,7 +23,7 @@ class PublishCommand extends BaseBookmakerCommand{
     protected function configure()
     {
         $this
-            ->setName('bookmaker:publish')
+            ->setName('bm:publish')
             ->setDescription('Publish book')
             ->addArgument(
                 'name',

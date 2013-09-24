@@ -16,7 +16,7 @@ class ListCommand extends BaseBookmakerCommand {
     protected function configure()
     {
         $this
-            ->setName('bookmaker:list')
+            ->setName('bm:list')
             ->setDescription('List books')
         ;
     }
