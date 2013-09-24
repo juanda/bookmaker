@@ -7,10 +7,7 @@
 
 namespace Jazzyweb\Bookmaker\Command;
 
-use Jazzyweb\Bookmaker\Configuration\BookmakerConfiguration;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
+use Jazzyweb\Bookmaker\Configuration\ConfigLoader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,34 +16,14 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Yaml\Yaml;
 
-class PublishCommand extends Command{
 
-    protected $processedConfiguration;
+class PublishCommand extends BaseBookmakerCommand{
 
-    public function __construct(){
-        parent::__construct();
-
-        try{
-            $configDirectories = array(__DIR__.'/../../../../config');
-
-            $locator = new FileLocator($configDirectories);
-            $configFile = $locator->locate('config.yml');
-            $config = Yaml::parse($configFile);
-
-            $processor = new Processor();
-            $configuration = new BookmakerConfiguration();
-            $this->processedConfiguration = $processor->processConfiguration($configuration, array($config));
-        }catch (InvalidConfigurationException $e){
-            $output = new ConsoleOutput();
-            $output->writeln('<error>Error: '.$e->getMessage().'</error>');
-        }
-    }
     protected function configure()
     {
         $this
-            ->setName('publish')
+            ->setName('bookmaker:publish')
             ->setDescription('Publish book')
             ->addArgument(
                 'name',
@@ -69,14 +46,15 @@ class PublishCommand extends Command{
         $format = $input->getOption('format');
         $dialog = $this->getHelperSet()->get('dialog');
 
+        $configuration = $this->getConfiguration();
 
-        if(!array_key_exists($name,$this->processedConfiguration['books'])){
+        if(!array_key_exists($name,$configuration['books'])){
             $output->writeln('<error>the book "'. $name . '" is not registered in configuration file');
             return;
         }
 
-        $sourceDir = $this->processedConfiguration['books'][$name]['source'];
-        $outputDir = $this->processedConfiguration['books'][$name]['output'];
+        $sourceDir = $configuration['books'][$name]['source'];
+        $outputDir = $configuration['books'][$name]['output'];
 
         $output->writeln('<info>Source directory: ' . $sourceDir . '</info>');
         $output->writeln('<info>Output directory: ' . $outputDir . '</info>');
