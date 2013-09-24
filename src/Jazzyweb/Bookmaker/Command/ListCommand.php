@@ -31,5 +31,4 @@ class ListCommand extends BaseBookmakerCommand {
             $output->writeln('<info>' . $book . '</info>');
         }
     }
-
 }
