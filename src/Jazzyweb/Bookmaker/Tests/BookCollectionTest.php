@@ -68,4 +68,11 @@ class BookCollectionTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(array('book1', 'book2'), $bookNames);
 
     }
+
+    public function testBookCollectionHas(){
+        $bookCollection = $this->buildBookCollection();
+
+        $this->assertEquals(true, $bookCollection->has('book1'));
+        $this->assertEquals(false, $bookCollection->has('book3'));
+    }
 }

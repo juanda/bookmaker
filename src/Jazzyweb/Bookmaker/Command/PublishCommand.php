@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Process\Process;
 
 
-class PublishCommand extends BaseBookmakerCommand{
+class PublishCommand extends Command{
 
     protected function configure()
     {
@@ -45,16 +45,19 @@ class PublishCommand extends BaseBookmakerCommand{
         $name = $input->getArgument('name');
         $format = $input->getOption('format');
         $dialog = $this->getHelperSet()->get('dialog');
+        $container = $this->getApplication()->getContainer();
 
-        $configuration = $this->getConfiguration();
+        $bookcollection = $container['bookcollection'];
 
-        if(!array_key_exists($name,$configuration['books'])){
+        if(!$bookcollection->has($name)){
             $output->writeln('<error>the book "'. $name . '" is not registered in configuration file');
             return;
         }
 
-        $sourceDir = $configuration['books'][$name]['source'];
-        $outputDir = $configuration['books'][$name]['output'];
+        $book = $bookcollection->get($name);
+
+        $sourceDir = $book->getSource();
+        $outputDir = $book->getOutput();
 
         $output->writeln('<info>Source directory: ' . $sourceDir . '</info>');
         $output->writeln('<info>Output directory: ' . $outputDir . '</info>');

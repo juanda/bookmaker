@@ -41,6 +41,9 @@ class BookCollection implements \IteratorAggregate, \Countable{
         return isset($this->bookcollection[$name]) ? $this->bookcollection[$name] : null;
     }
 
+    public function has($name){
+        return isset($this->bookcollection[$name]);
+    }
     /**
      * Removes a book
      *
