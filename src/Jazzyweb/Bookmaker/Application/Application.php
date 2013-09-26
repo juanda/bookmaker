@@ -38,25 +38,9 @@ class Application extends BaseApplication{
             return  $bookcollection;
         });
 
-        $this->container['filelocator'] = $this->container->share(function($c){
-            return new FileLocator();
-        });
-
-        $this->container['definition_processor'] = function($c){
-            return new Processor();
-        };
-
-        $this->container['bookmaker_configuration'] = $this->container->share(function($c){
-            return new BookmakerConfiguration();
-        });
-
         $this->container['bookloader'] = $this->container->share(function($c){
-            $procesor   = $c['definition_processor'];
-            $bookconfig = $c['bookmaker_configuration'];
-
-            return new BookLoader($procesor, $bookconfig);
+            return new BookLoader(new Processor(), new BookmakerConfiguration());
         });
-
     }
 
     public function getContainer(){
